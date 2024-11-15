@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Get references to UI elements
         val randomNumberText: TextView = findViewById(R.id.randomNumberText)
         val minNumberInput: EditText = findViewById(R.id.minNumberInput)
         val maxNumberInput: EditText = findViewById(R.id.maxNumberInput)
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val evenNumberSwitch: Switch = findViewById(R.id.evenNumberSwitch)
         val generateButton: Button = findViewById(R.id.generateButton)
 
-        // Button to navigate to PasswordGeneratorActivity
         val generatePasswordButton: Button = findViewById(R.id.generatePasswordButton)
         generatePasswordButton.setOnClickListener {
             val intent = Intent(this, PasswordGeneratorActivity::class.java)
@@ -41,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Set an onClickListener for the button to generate a random number
         generateButton.setOnClickListener {
             val min = minNumberInput.text.toString().toIntOrNull() ?: 0
             val max = maxNumberInput.text.toString().toIntOrNull() ?: 0

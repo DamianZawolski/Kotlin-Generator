@@ -28,7 +28,6 @@ class PasswordGeneratorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password_generator)
 
-        // Initialize views
         passwordTextView = findViewById(R.id.passwordTextView)
         passwordLengthEditText = findViewById(R.id.passwordLengthEditText)
         uppercaseSwitch = findViewById(R.id.uppercaseSwitch)
@@ -41,17 +40,14 @@ class PasswordGeneratorActivity : AppCompatActivity() {
         specialSwitch.isChecked=true
         generateButton = findViewById(R.id.generateButton)
 
-        // Set default password
         passwordTextView.text = "Haslo123"
 
-        // Button to navigate to PasswordGeneratorActivity
         val generatePasswordButton: Button = findViewById(R.id.generateNumberButton)
         generatePasswordButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-        // Generate button click listener
         generateButton.setOnClickListener {
             val lengthText = passwordLengthEditText.text.toString()
             passwordLength = if (lengthText.isNotEmpty()) lengthText.toInt() else 10
@@ -60,7 +56,6 @@ class PasswordGeneratorActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a valid length", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
             generatePassword()
         }
     }
