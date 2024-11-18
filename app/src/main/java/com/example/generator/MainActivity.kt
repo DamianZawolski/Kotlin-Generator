@@ -27,29 +27,35 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        oddNumberSwitch.setOnClickListener{
-            if (evenNumberSwitch.isChecked){
-                evenNumberSwitch.isChecked=false
+        oddNumberSwitch.setOnClickListener {
+            if (evenNumberSwitch.isChecked) {
+                evenNumberSwitch.isChecked = false
             }
         }
 
-        evenNumberSwitch.setOnClickListener{
-            if (oddNumberSwitch.isChecked){
-                oddNumberSwitch.isChecked=false
+        evenNumberSwitch.setOnClickListener {
+            if (oddNumberSwitch.isChecked) {
+                oddNumberSwitch.isChecked = false
             }
         }
 
         generateButton.setOnClickListener {
-            val min = minNumberInput.text.toString().toIntOrNull() ?: 0
-            val max = maxNumberInput.text.toString().toIntOrNull() ?: 0
+            var min = minNumberInput.text.toString().toIntOrNull() ?: 1
+            var max = maxNumberInput.text.toString().toIntOrNull() ?: 100
 
-            if (min >= max) {
-                randomNumberText.text = "Error"
-                return@setOnClickListener
+            if (min == max) {
+                max = min + 1
+            } else if (min > max) {
+                val temp = min
+                min = max
+                max = temp
             }
 
-            var randomNumber: Int
+            // Update min and max input fields with the adjusted values
+            minNumberInput.setText(min.toString())
+            maxNumberInput.setText(max.toString())
 
+            var randomNumber: Int
             do {
                 randomNumber = Random.nextInt(min, max + 1)
             } while (

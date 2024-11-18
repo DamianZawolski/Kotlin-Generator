@@ -1,7 +1,5 @@
-// PasswordGeneratorActivity.kt
 package com.example.generator
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -34,19 +32,25 @@ class PasswordGeneratorActivity : AppCompatActivity() {
         lowercaseSwitch = findViewById(R.id.lowercaseSwitch)
         numbersSwitch = findViewById(R.id.numbersSwitch)
         specialSwitch = findViewById(R.id.specialSwitch)
-        uppercaseSwitch.isChecked=true
-        lowercaseSwitch.isChecked=true
-        numbersSwitch.isChecked=true
-        specialSwitch.isChecked=true
         generateButton = findViewById(R.id.generateButton)
 
-        passwordTextView.text = "Haslo123"
+        // Enable all switches by default
+        uppercaseSwitch.isChecked = true
+        lowercaseSwitch.isChecked = true
+        numbersSwitch.isChecked = true
+        specialSwitch.isChecked = true
 
         val generatePasswordButton: Button = findViewById(R.id.generateNumberButton)
         generatePasswordButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        // Prevent all switches from being turned off
+        setupSwitchListener(uppercaseSwitch)
+        setupSwitchListener(lowercaseSwitch)
+        setupSwitchListener(numbersSwitch)
+        setupSwitchListener(specialSwitch)
 
         generateButton.setOnClickListener {
             val lengthText = passwordLengthEditText.text.toString()
@@ -58,6 +62,19 @@ class PasswordGeneratorActivity : AppCompatActivity() {
             }
             generatePassword()
         }
+    }
+
+    private fun setupSwitchListener(switch: Switch) {
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            if (!isChecked && !anySwitchChecked()) {
+                switch.isChecked = true // Re-enable the switch if it was the last one checked
+                Toast.makeText(this, "At least one option must be enabled", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun anySwitchChecked(): Boolean {
+        return uppercaseSwitch.isChecked || lowercaseSwitch.isChecked || numbersSwitch.isChecked || specialSwitch.isChecked
     }
 
     private fun generatePassword() {
