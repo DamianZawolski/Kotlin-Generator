@@ -34,7 +34,6 @@ class PasswordGeneratorActivity : AppCompatActivity() {
         specialSwitch = findViewById(R.id.specialSwitch)
         generateButton = findViewById(R.id.generateButton)
 
-        // Enable all switches by default
         uppercaseSwitch.isChecked = true
         lowercaseSwitch.isChecked = true
         numbersSwitch.isChecked = true
@@ -46,7 +45,6 @@ class PasswordGeneratorActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Prevent all switches from being turned off
         setupSwitchListener(uppercaseSwitch)
         setupSwitchListener(lowercaseSwitch)
         setupSwitchListener(numbersSwitch)
@@ -57,7 +55,7 @@ class PasswordGeneratorActivity : AppCompatActivity() {
             passwordLength = if (lengthText.isNotEmpty()) lengthText.toInt() else 10
 
             if (passwordLength <= 0) {
-                Toast.makeText(this, "Please enter a valid length", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Wprowadź prawidłową liczbę", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             generatePassword()
@@ -67,8 +65,8 @@ class PasswordGeneratorActivity : AppCompatActivity() {
     private fun setupSwitchListener(switch: Switch) {
         switch.setOnCheckedChangeListener { _, isChecked ->
             if (!isChecked && !anySwitchChecked()) {
-                switch.isChecked = true // Re-enable the switch if it was the last one checked
-                Toast.makeText(this, "At least one option must be enabled", Toast.LENGTH_SHORT).show()
+                switch.isChecked = true
+                Toast.makeText(this, "Wybierz przynajmniej jedną opcję", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -90,7 +88,7 @@ class PasswordGeneratorActivity : AppCompatActivity() {
         if (specialSwitch.isChecked) chars += special
 
         if (chars.isEmpty()) {
-            Toast.makeText(this, "Please enable at least one option", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Wybierz przynajmniej jedną opcję", Toast.LENGTH_SHORT).show()
             return
         }
 

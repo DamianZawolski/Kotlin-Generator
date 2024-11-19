@@ -45,20 +45,21 @@ class MainActivity : AppCompatActivity() {
 
             if (min == max) {
                 max = min + 1
-            } else if (min > max) {
+            }
+            else if (min > max) {
                 val temp = min
                 min = max
                 max = temp
             }
 
-            // Update min and max input fields with the adjusted values
             minNumberInput.setText(min.toString())
             maxNumberInput.setText(max.toString())
 
             var randomNumber: Int
             do {
                 randomNumber = Random.nextInt(min, max + 1)
-            } while (
+            }
+            while (
                 (oddNumberSwitch.isChecked && randomNumber % 2 == 0) ||
                 (evenNumberSwitch.isChecked && randomNumber % 2 != 0)
             )
